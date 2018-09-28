@@ -15,7 +15,7 @@ func main() {
 	pin := rpio.Pin(10)
 	pin.Output()
 	r := gin.Default()
-	r.GET("/:deg", func(c *gin.Context) {
+	r.GET("/@:deg", func(c *gin.Context) {
 		deg := c.Param("deg")
 		fmt.Println(deg)
 		if deg == "on" {
