@@ -1,0 +1,36 @@
+version: 2
+jobs:
+  test:
+    environment:
+      - GO111MODULE: "on"
+      - CGO_ENABLED: "0"
+    working_directory: /work
+    docker:
+      - image: makki0205/deploy
+    steps:
+      - checkout
+      - run:
+          name: build
+          command: make build
+  production:
+    working_directory: /work
+    docker:
+      - image: makki0205/deploy
+    steps:
+      - setup_remote_docker:
+          reusable: true
+      - run:
+          name: deploy
+          command: make ci/deploy
+
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - test
+      - production:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
