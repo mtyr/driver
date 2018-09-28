@@ -7,6 +7,7 @@ docker/build:
 docker/push:
 	docker push halosaka/driver-servo
 local/deploy:
+	ls -la
 	make build
 	make docker/build
 	make docker/push
