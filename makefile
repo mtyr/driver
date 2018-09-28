@@ -1,5 +1,5 @@
-go/build:
-    env GO111MODULE=on env GOOS=linux env GOARCH=arm env CGO_ENABLED=0 go build  -o servo/cmd/main servo/main.go
+build:
+	env GO111MODULE=on env GOOS=linux env GOARCH=arm env CGO_ENABLED=0 go build  -o servo/cmd/main servo/main.go
 login:
 	docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
 docker/build:
