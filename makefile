@@ -3,7 +3,7 @@ build:
 login:
 	docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
 docker/build:
-	docker build -t halosaka/driver-servo -f ./Dockerfile servo/
+	docker build -t halosaka/driver-servo -f ./Dockerfile ./servo/
 docker/push:
 	docker push halosaka/driver-servo
 local/deploy:
