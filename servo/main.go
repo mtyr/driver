@@ -20,6 +20,8 @@ func main() {
 		fmt.Println(deg)
 		if deg == "on" {
 			pin.High()
+		} else if deg == "toggle" {
+			pin.toggle()
 		} else {
 			pin.Low()
 		}

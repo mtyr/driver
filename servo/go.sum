@@ -6,6 +6,8 @@ github.com/golang/protobuf v1.2.0 h1:P3YflyNX/ehuJFLhxviNdFxQPkGK5cDcApsge1SqnvM
 github.com/golang/protobuf v1.2.0/go.mod h1:6lQm79b+lXiMfvg/cZm0SGofjICqVBUtrP5yJMmIC1U=
 github.com/mattn/go-isatty v0.0.4 h1:bnP0vzxcAdeI1zdubAl5PjU6zsERjGZb7raWodagDYs=
 github.com/mattn/go-isatty v0.0.4/go.mod h1:M+lRXTBqGeGNdLjl/ufCoiOlB5xdOkqRJdNxMWT7Zi4=
+github.com/stianeikeland/go-rpio v3.0.0+incompatible h1:AWDcfdnPPZ7Jikis6HNj0EgujMfB4t7oi4nZd5cIqko=
+github.com/stianeikeland/go-rpio v3.0.0+incompatible/go.mod h1:Sh81rdJwD96E2wja2Gd7rrKM+XZ9LrwvN2w4IXrqLR8=
 github.com/ugorji/go/codec v0.0.0-20180920200043-2c86ab75771c h1:VKaVTivuPeZPjcuRzM9sF11ZZHIZweq4cbnQHxfeoy8=
 github.com/ugorji/go/codec v0.0.0-20180920200043-2c86ab75771c/go.mod h1:VFNgLljTbGfSG7qAOspJ7OScBnGdDN/yBr0sguwnwf0=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
