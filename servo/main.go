@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"strconv"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	rpio "github.com/stianeikeland/go-rpio"
@@ -9,21 +11,31 @@ import (
 
 func main() {
 	err := rpio.Open()
+
 	if err != nil {
+		defer rpio.Close()
 		panic(err)
+
 	}
+
 	pin := rpio.Pin(10)
-	pin.Output()
+	pin.Mode(rpio.Pwm)
+	pin.Freq(64000)
+	pin.DutyCycle(0, 32)
+
 	r := gin.Default()
 	r.GET("/@:deg", func(c *gin.Context) {
-		deg := c.Param("deg")
+		deg := strconv.Atoi(c.Param("deg"))
 		fmt.Println(deg)
-		if deg == "on" {
-			pin.High()
-		} else if deg == "toggle" {
-			pin.toggle()
-		} else {
-			pin.Low()
+		for true {
+			for i := uint32(0); i < 32; i++ {
+				pin.DutyCycle(i, 32)
+				time.Sleep(time.Second / 32)
+			}
+			for i := uint32(32); i > 0; i-- {
+				pin.DutyCycle(i, 32)
+				time.Sleep(time.Second / 32)
+			}
 		}
 		c.JSON(200, "ok!")
 	})
