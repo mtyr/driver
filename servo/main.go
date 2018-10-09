@@ -3,10 +3,18 @@ package main
 import (
 	"fmt"
 	"strconv"
-	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/hal-ms/driver/rpio"
+)
+
+const (
+	freq = 64000
+)
+
+const (
+	deg0msec   = 650
+	deg180msec = 2350
 )
 
 func main() {
@@ -18,8 +26,8 @@ func main() {
 	}
 
 	pin := rpio.Pin(19)
-	pin.Mode(rpio.Pwm)
-	pin.Freq(64000)
+	pin.Pwm()
+	pin.Freq(freq)
 	pin.DutyCycle(0, 32)
 
 	r := gin.Default()
@@ -31,17 +39,10 @@ func main() {
 			panic(err)
 		}
 
+		dutyLen := freq / (deg0msec + deg/180*(deg180msec-deg0msec))
 		fmt.Println(deg)
-		for i := uint32(0); i < 10; i++ {
-			for i := uint32(0); i < 32; i++ {
-				pin.DutyCycle(i, 32)
-				time.Sleep(time.Second / 32)
-			}
-			for i := uint32(32); i > 0; i-- {
-				pin.DutyCycle(i, 32)
-				time.Sleep(time.Second / 32)
-			}
-		}
+		pin.DutyCycle(dutyLen, 32)
+
 		c.JSON(200, "ok!")
 	})
 	r.Run(":8000")
