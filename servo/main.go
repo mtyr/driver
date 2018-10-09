@@ -32,7 +32,7 @@ func main() {
 		}
 
 		fmt.Println(deg)
-		for {
+		for i := uint32(0); i < 10; i++ {
 			for i := uint32(0); i < 32; i++ {
 				pin.DutyCycle(i, 32)
 				time.Sleep(time.Second / 32)
