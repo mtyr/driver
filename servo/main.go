@@ -13,8 +13,8 @@ const (
 )
 
 const (
-	deg0msec   = 650
-	deg180msec = 2350
+	deg0usec   = 750
+	deg180usec = 2250
 )
 
 func main() {
@@ -28,20 +28,21 @@ func main() {
 	pin := rpio.Pin(19)
 	pin.Pwm()
 	pin.Freq(freq)
-	pin.DutyCycle(0, 32)
+	pin.DutyCycle(0, 1280)
 
 	r := gin.Default()
 	r.GET("/@:deg", func(c *gin.Context) {
 		deg, err := strconv.Atoi(c.Param("deg"))
+		fmt.Println(deg)
 
 		if err != nil {
 			defer rpio.Close()
 			panic(err)
 		}
 
-		dutyLen := uint32(freq / (deg0msec + deg/180*(deg180msec-deg0msec)))
-		fmt.Println(deg)
-		pin.DutyCycle(dutyLen, 32)
+		duty := deg0usec + deg/180*(deg180usec-deg0usec)
+		dutyLen := uint32(duty / 20000 * 1280)
+		pin.DutyCycle(dutyLen, 1280)
 
 		c.JSON(200, "ok!")
 	})
