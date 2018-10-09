@@ -39,7 +39,7 @@ func main() {
 			panic(err)
 		}
 
-		dutyLen := freq / (deg0msec + deg/180*(deg180msec-deg0msec))
+		dutyLen := uint32(freq / (deg0msec + deg/180*(deg180msec-deg0msec)))
 		fmt.Println(deg)
 		pin.DutyCycle(dutyLen, 32)
 
