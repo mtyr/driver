@@ -15,7 +15,6 @@ func main() {
 	if err != nil {
 		defer rpio.Close()
 		panic(err)
-
 	}
 
 	pin := rpio.Pin(10)
@@ -25,7 +24,13 @@ func main() {
 
 	r := gin.Default()
 	r.GET("/@:deg", func(c *gin.Context) {
-		deg := strconv.Atoi(c.Param("deg"))
+		deg, err := strconv.Atoi(c.Param("deg"))
+
+		if err != nil {
+			defer rpio.Close()
+			panic(err)
+		}
+
 		fmt.Println(deg)
 		for true {
 			for i := uint32(0); i < 32; i++ {
