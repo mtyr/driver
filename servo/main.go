@@ -42,8 +42,9 @@ func main() {
 
 		duty := deg0usec + deg/180*(deg180usec-deg0usec)
 		dutyLen := uint32(duty / 20000 * 1280)
-		pin.DutyCycle(dutyLen, 1280)
-
+		for( i := 0; i < 30; i++){
+			pin.DutyCycle(dutyLen, 1280)
+		}
 		c.JSON(200, "ok!")
 	})
 	r.Run(":8000")
