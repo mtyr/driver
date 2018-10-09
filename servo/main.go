@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	rpio "github.com/stianeikeland/go-rpio"
+	"github.com/hal-ms/driver/rpio"
 )
 
 func main() {
@@ -32,7 +32,7 @@ func main() {
 		}
 
 		fmt.Println(deg)
-		for true {
+		for {
 			for i := uint32(0); i < 32; i++ {
 				pin.DutyCycle(i, 32)
 				time.Sleep(time.Second / 32)
