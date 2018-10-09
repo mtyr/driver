@@ -17,7 +17,7 @@ func main() {
 		panic(err)
 	}
 
-	pin := rpio.Pin(10)
+	pin := rpio.Pin(19)
 	pin.Mode(rpio.Pwm)
 	pin.Freq(64000)
 	pin.DutyCycle(0, 32)
