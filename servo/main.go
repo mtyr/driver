@@ -36,9 +36,9 @@ func main() {
 		deg, err := strconv.Atoi(c.Param("deg"))
 		fmt.Println(deg)
 
-		if err != nil {
-			defer rpio.Close()
-			panic(err)
+		if err != nil || deg < 0 || deg > 180 {
+			c.JSON(400, "Bad reqest")
+			return
 		}
 
 		duty := deg0usec + deg*(deg180usec-deg0usec)/180
