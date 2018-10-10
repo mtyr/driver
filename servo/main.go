@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"strconv"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/hal-ms/driver/rpio"
@@ -40,11 +41,13 @@ func main() {
 			panic(err)
 		}
 
-		duty := deg0usec + deg/180*(deg180usec-deg0usec)
-		dutyLen := uint32(duty / 20000 * 1280)
-		for i := 0; i < 30; i++ {
-			pin.DutyCycle(dutyLen, 1280)
-		}
+		duty := deg0usec + deg*(deg180usec-deg0usec)/180
+		dutyLen := uint32(duty * 1280 / 20000)
+		fmt.Println(dutyLen)
+
+		pin.DutyCycle(dutyLen, 1280)
+		time.Sleep(time.Second / 1280)
+
 		c.JSON(200, "ok!")
 	})
 	r.Run(":8000")
