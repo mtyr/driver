@@ -1,6 +1,10 @@
 package service
 
 import (
+	"errors"
+
+	"github.com/hal-ms/driver/building/db"
+	"github.com/hal-ms/driver/building/model"
 	"github.com/tarm/serial"
 )
 
@@ -11,7 +15,7 @@ type buildingService struct {
 }
 
 func newBuildingService() buildingService {
-	c := &serial.Config{Name: "COM9", Baud: 9600}
+	c := &serial.Config{Name: "COM14", Baud: 9600}
 	s, err := serial.OpenPort(c)
 	if err != nil {
 		//log.SendSlack(err.Error())
@@ -21,8 +25,14 @@ func newBuildingService() buildingService {
 	return buildingService{conn: conn}
 }
 
-func (s *buildingService) Bar() error {
-	s.write([]byte{0x00})
+func (s *buildingService) Animation(scene string) error {
+	db := db.DB.Get()
+	var d model.Scene
+	err := db.Read("Scene", scene, &d)
+	if err != nil {
+		return errors.New("存在しないシーン")
+	}
+	s.write(d.Data)
 	return nil
 }
 

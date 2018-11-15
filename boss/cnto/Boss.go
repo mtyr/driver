@@ -20,4 +20,5 @@ func Boss(c *gin.Context) {
 
 	service.Boss.Pow(deg)
 	c.JSON(http.StatusOK, "OK")
+
 }

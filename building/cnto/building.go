@@ -8,6 +8,10 @@ import (
 )
 
 func Building(c *gin.Context) {
-	service.Building.Bar()
+	scene := c.Param("scene")
+	err := service.Building.Animation(scene)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, err.Error())
+	}
 	c.JSON(http.StatusOK, "OK")
 }

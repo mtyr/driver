@@ -7,7 +7,8 @@ import (
 
 func main() {
 	r := gin.Default()
-	r.GET("/", cnto.Building)
+	r.GET("/:scene", cnto.Building)
+	r.POST("/:scene", cnto.Scene)
 	go r.Run(":8000")
 	//go send()
 

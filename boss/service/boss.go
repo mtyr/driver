@@ -39,4 +39,12 @@ func (s *bossService) Pow(deg int) {
 	dutyLen := uint32(duty * 1280 / 20000)
 	pin.DutyCycle(dutyLen, 1280)
 	time.Sleep(time.Second / 1280)
+
+	time.Sleep(time.Second)
+
+	duty := deg0usec + 0*(deg180usec-deg0usec)/180
+	dutyLen := uint32(duty * 1280 / 20000)
+	pin.DutyCycle(dutyLen, 1280)
+	time.Sleep(time.Second / 1280)
+
 }
