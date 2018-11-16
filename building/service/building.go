@@ -32,7 +32,7 @@ func (s *buildingService) Animation(scene string) error {
 	if err != nil {
 		return errors.New("存在しないシーン")
 	}
-	s.write(d.Data)
+	s.write(d.Raw)
 	return nil
 }
 
